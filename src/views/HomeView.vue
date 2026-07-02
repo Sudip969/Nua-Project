@@ -48,7 +48,7 @@ onMounted(() => {
 </script>
 
 <style lang="scss" scoped>
-@use '../assets/styles/variables' as *;
+@use '../styles/variables' as *;
 
 .home-view {
   padding-top: 40px;

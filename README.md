@@ -47,10 +47,11 @@ A responsive mini e-commerce application built using **Vue 3**, **Vuex 4**, **Vu
 
 ```text
 src/
-├── assets/styles
 ├── components/
+├── docs/
 ├── router/
 ├── store/
+├── styles/
 ├── views/
 └── App.vue
 ```

@@ -51,7 +51,7 @@ const addToCart = async () => {
 </script>
 
 <style lang="scss" scoped>
-@use '../assets/styles/variables' as *;
+@use '../styles/variables' as *;
 
 .product-card {
   border: $border-width solid $border-color;

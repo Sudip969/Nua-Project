@@ -124,7 +124,7 @@ const removeItem = (item) => {
 </script>
 
 <style lang="scss" scoped>
-@use '../assets/styles/variables' as *;
+@use '../styles/variables' as *;
 
 .cart-drawer-wrapper {
   position: fixed;

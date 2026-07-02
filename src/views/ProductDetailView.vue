@@ -287,7 +287,7 @@ onMounted(async () => {
 </script>
 
 <style lang="scss" scoped>
-@use '../assets/styles/variables' as *;
+@use '../styles/variables' as *;
 
 .product-detail-view {
   padding-top: 40px;

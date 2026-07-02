@@ -22,7 +22,7 @@ onMounted(() => {
 </script>
 
 <style lang="scss">
-@use './assets/styles/global';
+@use './styles/global';
 
 .app-layout {
   display: flex;

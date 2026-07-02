@@ -25,7 +25,7 @@ const toggleCart = () => {
 </script>
 
 <style lang="scss" scoped>
-@use '../assets/styles/variables' as *;
+@use '../styles/variables' as *;
 
 .navbar {
   background-color: $bg-color;
