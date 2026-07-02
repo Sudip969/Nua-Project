@@ -8,14 +8,17 @@
         <h3 class="product-title">{{ product.title }}</h3>
       </router-link>
       <span class="product-price">${{ Number(product.price).toFixed(2) }}</span>
-      <button @click="addToCart" class="add-to-cart-btn">
-        Add to Cart
+      <button @click="addToCart" class="add-to-cart-btn" :disabled="isAdding">
+        <span v-if="isAdding">Adding...</span>
+        <span v-else-if="justAdded">Added!</span>
+        <span v-else>Add to Cart</span>
       </button>
     </div>
   </div>
 </template>
 
 <script setup>
+import { ref } from 'vue'
 import { useStore } from 'vuex'
 
 const props = defineProps({
@@ -26,9 +29,24 @@ const props = defineProps({
 })
 
 const store = useStore()
+const isAdding = ref(false)
+const justAdded = ref(false)
 
-const addToCart = () => {
-  store.dispatch('addToCart', props.product)
+const addToCart = async () => {
+  if (isAdding.value) return
+  isAdding.value = true
+  justAdded.value = false
+  try {
+    await store.dispatch('addToCart', props.product)
+    justAdded.value = true
+    setTimeout(() => {
+      justAdded.value = false
+    }, 1500)
+  } catch (err) {
+    alert(err.message || 'Failed to add item to cart')
+  } finally {
+    isAdding.value = false
+  }
 }
 </script>
 

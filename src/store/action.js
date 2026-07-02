@@ -32,7 +32,17 @@ export default {
       commit('SET_LOADING', false)
     }
   },
-  addToCart({ commit }, payload) {
+  async addToCart({ commit }, payload) {
+
+    // A mock network call delay of 1000ms for the bonus point
+    await new Promise((resolve) => setTimeout(resolve, 1000))
+
+    // Failure rate is 25%
+    const isSuccess = Math.random() > 0.25
+    if (!isSuccess) {
+      throw new Error('API Error: Failed to add product to cart. Please try again.')
+    }
+
     commit('ADD_TO_CART', payload)
   },
   initializeCart({ commit }) {

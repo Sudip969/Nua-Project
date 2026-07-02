@@ -111,7 +111,8 @@
                 :disabled="currentStock === 0 || isAdding"
                 @click="handleAddToCart"
               >
-                <span v-if="isAdding">Added to Cart!</span>
+                <span v-if="isAdding">Adding...</span>
+                <span v-else-if="justAdded">Added to Cart!</span>
                 <span v-else-if="currentStock === 0">Sold Out</span>
                 <span v-else>Add to Cart</span>
               </button>
@@ -147,6 +148,7 @@ const selectedColor = ref('Black')
 const selectedSize = ref('S')
 const quantity = ref(1)
 const isAdding = ref(false)
+const justAdded = ref(false)
 
 
 const activeThumbnailIndex = ref(0)
@@ -254,20 +256,28 @@ const adjustQuantity = (amount) => {
   }
 }
 
-const handleAddToCart = () => {
-  if (currentStock.value === 0) return
+const handleAddToCart = async () => {
+  if (currentStock.value === 0 || isAdding.value) return
   
   isAdding.value = true
-  store.dispatch('addToCart', {
-    product: product.value,
-    quantity: quantity.value,
-    color: selectedColor.value,
-    size: selectedSize.value
-  })
-
-  setTimeout(() => {
+  justAdded.value = false
+  
+  try {
+    await store.dispatch('addToCart', {
+      product: product.value,
+      quantity: quantity.value,
+      color: selectedColor.value,
+      size: selectedSize.value
+    })
+    justAdded.value = true
+    setTimeout(() => {
+      justAdded.value = false
+    }, 1500)
+  } catch (err) {
+    alert(err.message || 'Failed to add item to cart')
+  } finally {
     isAdding.value = false
-  }, 1500)
+  }
 }
 
 onMounted(async () => {
