@@ -1,14 +1,18 @@
 <template>
   <div class="app-layout">
-    <main class="main-content">
+    <Navbar />
+    <main class="main-layout">
       <router-view />
     </main>
+    <CartDrawer />
   </div>
 </template>
 
 <script setup>
 import { onMounted } from 'vue'
 import { useStore } from 'vuex'
+import Navbar from './components/Navbar.vue'
+import CartDrawer from './components/CartDrawer.vue'
 
 const store = useStore()
 
@@ -26,7 +30,7 @@ onMounted(() => {
   min-height: 100vh;
 }
 
-.main-content {
+.main-layout {
   flex-grow: 1;
 }
 </style>

@@ -1,26 +1,20 @@
 <template>
   <div class="home-view container">
     <header class="page-header">
-      <h1 class="page-title">Catalog</h1>
-      <div class="cart-indicator">
-        Cart ({{ cartCount }})
-      </div>
+      <h1>CATALOG</h1>
     </header>
 
-    <!-- Loading State -->
     <div v-if="loading" class="loading-state">
       <div class="loading-spinner"></div>
       <p>Loading products...</p>
     </div>
 
-    <!-- Error State -->
     <div v-else-if="error" class="error-state">
       <h2>Something went wrong</h2>
       <p>{{ error }}</p>
-      <button @click="retryFetch" class="retry-btn">Try Again</button>
+      <button @click="retryFetch">Try Again</button>
     </div>
 
-    <!-- Product Grid -->
     <div v-else class="product-grid">
       <ProductCard 
         v-for="product in products" 
@@ -41,7 +35,6 @@ const store = useStore()
 const products = computed(() => store.state.products)
 const loading = computed(() => store.state.loading)
 const error = computed(() => store.state.error)
-const cartCount = computed(() => store.getters.cartCount)
 
 const retryFetch = () => {
   store.dispatch('fetchProducts')
@@ -63,26 +56,7 @@ onMounted(() => {
 }
 
 .page-header {
-  margin-bottom: 32px;
-  border-bottom: $border-width solid $border-color;
-  padding-bottom: 16px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  .page-title {
-    font-size: 2rem;
-    font-weight: 900;
-    text-transform: uppercase;
-    letter-spacing: -0.03em;
-  }
-
-  .cart-indicator {
-    font-weight: 600;
-    border: $border-width solid $border-color;
-    padding: 6px 12px;
-    background-color: $bg-color;
-  }
+  margin-bottom: 16px;
 }
 
 .product-grid {

@@ -37,5 +37,17 @@ export default {
   },
   initializeCart({ commit }) {
     commit('INITIALIZE_CART')
+  },
+  toggleCart({ commit }) {
+    commit('TOGGLE_CART_OPEN')
+  },
+  setCartOpen({ commit }, isOpen) {
+    commit('SET_CART_OPEN', isOpen)
+  },
+  removeFromCart({ commit }, payload) {
+    commit('REMOVE_FROM_CART', payload)
+  },
+  updateCartQuantity({ commit }, payload) {
+    commit('UPDATE_CART_QUANTITY', payload)
   }
 }

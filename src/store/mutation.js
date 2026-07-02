@@ -44,5 +44,26 @@ export default {
       state.cart.push({ product, quantity, color, size })
     }
     localStorage.setItem('cart', JSON.stringify(state.cart))
+  },
+  TOGGLE_CART_OPEN(state) {
+    state.isCartOpen = !state.isCartOpen
+  },
+  SET_CART_OPEN(state, isOpen) {
+    state.isCartOpen = isOpen
+  },
+  REMOVE_FROM_CART(state, { productId, color, size }) {
+    state.cart = state.cart.filter(item => 
+      !(item.product.id === productId && item.color === color && item.size === size)
+    )
+    localStorage.setItem('cart', JSON.stringify(state.cart))
+  },
+  UPDATE_CART_QUANTITY(state, { productId, color, size, quantity }) {
+    const item = state.cart.find(item => 
+      item.product.id === productId && item.color === color && item.size === size
+    )
+    if (item) {
+      item.quantity = quantity
+    }
+    localStorage.setItem('cart', JSON.stringify(state.cart))
   }
 }

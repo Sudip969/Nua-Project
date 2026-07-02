@@ -9,6 +9,7 @@ export default createStore({
       products: [],
       currentProduct: null,
       cart: [],
+      isCartOpen: false,
       loading: false,
       error: null
     }

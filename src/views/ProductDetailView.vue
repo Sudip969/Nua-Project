@@ -10,7 +10,7 @@
     <div v-else-if="error || !product" class="error-state">
       <h2>Could not load product</h2>
       <p>{{ error || 'Product not found' }}</p>
-      <router-link to="/" class="btn-link"><button>Back to Catalog</button></router-link>
+      <router-link to="/"><button>Back to Catalog</button></router-link>
     </div>
 
 
@@ -105,7 +105,7 @@
               </div>
             </div>
 
-            <div class="add-to-cart-wrapper">
+            <div>
               <button 
                 class="add-to-cart-btn" 
                 :disabled="currentStock === 0 || isAdding"
@@ -194,7 +194,7 @@ const getBrand = (category) => {
     "jewelery": 'AURA JEWELRY',
     "electronics": 'VOLT TECH'
   }
-  return mapping[category] || 'NUA CLASSICS'
+  return category.toUpperCase() || 'NUA CLASSICS'
 }
 
 const originalPrice = computed(() => {
@@ -285,9 +285,8 @@ onMounted(async () => {
 }
 
 .back-link {
-  display: inline-block;
+  display: block;
   margin-bottom: 24px;
-  font-weight: 600;
   text-transform: uppercase;
   font-size: 0.85rem;
   letter-spacing: 0.05em;
@@ -323,13 +322,18 @@ onMounted(async () => {
       max-width: 100%;
       max-height: 100%;
       object-fit: contain;
-      transition: filter 0.2s ease;
     }
   }
 
   .thumbnails-grid {
     display: flex;
     gap: 12px;
+
+    @media (max-width: 767px) {
+      overflow-x: auto;
+      flex-wrap: nowrap;
+      padding-bottom: 8px;
+    }
 
     .thumbnail-btn {
       flex: 1;
@@ -341,14 +345,15 @@ onMounted(async () => {
       flex-direction: column;
       justify-content: space-between;
       align-items: center;
+
+      @media (max-width: 767px) {
+        flex: 0 0 90px;
+      }
       cursor: pointer;
       overflow: hidden;
-      transition: transform 0.15s ease, box-shadow 0.15s ease;
 
       &.active {
         background-color: $gray-light;
-        box-shadow: 3px 3px 0px $border-color;
-        transform: translate(-3px, -3px);
       }
 
       .thumbnail-image {
@@ -359,7 +364,6 @@ onMounted(async () => {
 
       .thumbnail-label {
         font-size: 0.7rem;
-        font-weight: 700;
         text-transform: uppercase;
         margin-top: 4px;
         letter-spacing: 0.05em;
@@ -381,7 +385,6 @@ onMounted(async () => {
 
   .brand-label {
     font-size: 0.8rem;
-    font-weight: 800;
     letter-spacing: 0.1em;
     color: $gray-dark;
     text-transform: uppercase;
@@ -389,7 +392,6 @@ onMounted(async () => {
 
   .product-title {
     font-size: 1.8rem;
-    font-weight: 900;
     line-height: 1.2;
     text-transform: uppercase;
     letter-spacing: -0.02em;
@@ -404,12 +406,10 @@ onMounted(async () => {
       color: $gray-medium;
       text-decoration: line-through;
       font-size: 1.2rem;
-      font-weight: 600;
     }
 
     .sale-price {
       font-size: 1.8rem;
-      font-weight: 900;
     }
   }
 
@@ -425,7 +425,6 @@ onMounted(async () => {
   .group-label {
     display: block;
     font-size: 0.85rem;
-    font-weight: 700;
     text-transform: uppercase;
     margin-bottom: 8px;
     letter-spacing: 0.05em;
@@ -441,7 +440,6 @@ onMounted(async () => {
     .size-btn {
       padding: 8px 12px;
       font-size: 0.9rem;
-      font-weight: 700;
       border: $border-width solid $border-color;
       background-color: $bg-color;
       cursor: pointer;
@@ -451,23 +449,44 @@ onMounted(async () => {
 
       .stock-status-tag {
         font-size: 0.75rem;
-        font-weight: 400;
         margin-left: 4px;
         opacity: 0.7;
+      }
+
+      &:hover {
+        background-color: $gray-light;
+        color: $text-color;
       }
 
       &.active {
         background-color: $border-color;
         color: $bg-color;
+
+        &:hover {
+          background-color: $border-color;
+          color: $bg-color;
+        }
       }
 
       &.low-stock {
         border-color: #f59e0b;
         color: #d97706;
+        background-color: $bg-color;
+
+        &:hover {
+          background-color: #fffbeb;
+          color: #d97706;
+        }
+
         &.active {
           background-color: #f59e0b;
           color: #ffffff;
           border-color: #d97706;
+
+          &:hover {
+            background-color: #d97706;
+            color: #ffffff;
+          }
         }
       }
 
@@ -521,23 +540,18 @@ onMounted(async () => {
     }
 
     .quantity-value {
-      font-weight: 700;
       padding: 0 12px;
       min-width: 32px;
       text-align: center;
     }
   }
 
-  .add-to-cart-wrapper {
-    flex-grow: 1;
-  }
 
   .add-to-cart-btn {
     width: 100%;
     height: 42px;
     font-size: 0.95rem;
     text-transform: uppercase;
-    font-weight: 800;
     letter-spacing: 0.05em;
   }
 

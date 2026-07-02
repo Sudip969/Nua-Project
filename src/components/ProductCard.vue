@@ -4,12 +4,10 @@
       <img :src="product.image" :alt="product.title" class="product-image" />
     </router-link>
     <div class="product-info">
-      <router-link :to="`/product/${product.id}`" class="product-title-link">
+      <router-link :to="`/product/${product.id}`">
         <h3 class="product-title">{{ product.title }}</h3>
       </router-link>
-      <div class="product-meta">
-        <span class="product-price">${{ Number(product.price).toFixed(2) }}</span>
-      </div>
+      <span class="product-price">${{ Number(product.price).toFixed(2) }}</span>
       <button @click="addToCart" class="add-to-cart-btn">
         Add to Cart
       </button>
@@ -38,7 +36,6 @@ const addToCart = () => {
 @use '../assets/styles/variables' as *;
 
 .product-card {
-  background-color: $bg-color;
   border: $border-width solid $border-color;
   display: flex;
   flex-direction: column;
@@ -61,7 +58,6 @@ const addToCart = () => {
     .product-image {
       max-width: 100%;
       max-height: 100%;
-      object-fit: contain;
     }
   }
 
@@ -73,12 +69,8 @@ const addToCart = () => {
     justify-content: space-between;
   }
 
-  .product-title-link {
-    display: block;
-    margin-bottom: 12px;
-  }
-
   .product-title {
+    margin-bottom: 12px;
     font-size: 1rem;
     font-weight: 700;
     line-height: 1.3;
@@ -92,13 +84,12 @@ const addToCart = () => {
     overflow: hidden;
   }
 
-  .product-meta {
-    margin-bottom: 16px;
-  }
 
   .product-price {
     font-size: 1.2rem;
     font-weight: 800;
+    margin-bottom: 16px;
+
   }
 
   .add-to-cart-btn {
