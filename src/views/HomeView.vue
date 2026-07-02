@@ -85,45 +85,6 @@ onMounted(() => {
   }
 }
 
-.loading-state, .error-state {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 80px 20px;
-  text-align: center;
-  border: $border-width solid $border-color;
-  background-color: $bg-color;
-
-  h2 {
-    font-size: 1.5rem;
-    font-weight: 800;
-    margin-bottom: 8px;
-    text-transform: uppercase;
-  }
-
-  p {
-    margin-bottom: 20px;
-    color: $gray-dark;
-  }
-}
-
-.loading-spinner {
-  width: 40px;
-  height: 40px;
-  border: $border-width solid $border-color;
-  border-top-color: transparent;
-  border-radius: 50%;
-  animation: spin 0.8s linear infinite;
-  margin-bottom: 16px;
-}
-
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
 .product-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
