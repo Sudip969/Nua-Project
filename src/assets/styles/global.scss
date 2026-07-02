@@ -1,0 +1,60 @@
+@use './variables' as *;
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: $bg-color;
+  color: $text-color;
+  font-family: $font-family;
+  padding: 0;
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+button {
+  font-family: inherit;
+  background-color: $bg-color;
+  color: $text-color;
+  border: $border-width solid $border-color;
+  padding: 8px 16px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background-color: $border-color;
+    color: $bg-color;
+  }
+
+  &:disabled {
+    background-color: $gray-light;
+    color: $gray-medium;
+    border-color: $gray-medium;
+    cursor: not-allowed;
+    &:hover {
+      background-color: $gray-light;
+      color: $gray-medium;
+      border-color: $gray-medium;
+    }
+  }
+}
+
+// Simple layout utilities
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
